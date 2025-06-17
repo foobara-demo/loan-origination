@@ -13,7 +13,7 @@ module FoobaraDemo
       end
 
       def add_pay_stub_to_loan_file
-        loan_file.pay_stubs.append(pay_stub)
+        loan_file.pay_stubs += [pay_stub]
       end
     end
   end

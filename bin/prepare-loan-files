@@ -46,6 +46,7 @@ fumikos_loan_file = FoobaraDemo::LoanOrigination::StartLoanApplication.run!(
 )
 
 [barbaras_loan_file, basils_loan_file, fumikos_loan_file].each do |loan_file|
+  loan_file = loan_file.id
   { experian: 500, equifax: 650, transunion: 750 }.each_pair do |reporting_agency, score|
     FoobaraDemo::LoanOrigination::AddCreditScore.run!(loan_file:, credit_score: { reporting_agency:, score: })
   end

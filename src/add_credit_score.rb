@@ -13,7 +13,7 @@ module FoobaraDemo
       end
 
       def add_credit_score_to_loan_file
-        loan_file.credit_scores.append(credit_score)
+        loan_file.credit_scores += [credit_score]
       end
     end
   end
