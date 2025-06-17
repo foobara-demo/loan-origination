@@ -3,7 +3,7 @@ module FoobaraDemo
     class CreditPolicy < Foobara::Entity
       attributes do
         id :integer
-        name :string, :required
+        institutional_investor_name :string, :required
         minimum_credit_score :integer, :required
         credit_score_to_use :symbol, :required, one_of: [:median, :maximum],
                                                 description: "If the scores are 500, 650, and 700, then " \

@@ -1,0 +1,16 @@
+source "https://rubygems.org"
+
+gem "foobara-demo-loan-origination", path: ".."
+
+gem "foobara", path: "../../../foobara/foobara"
+
+gem "foobara-agent-cli"
+gem "foobara-anthropic-api"
+gem "foobara-dotenv-loader"
+gem "foobara-local-files-crud-driver"
+gem "foobara-ollama-api"
+gem "foobara-open-ai-api"
+gem "foobara-sh-cli-connector"
+gem "irb"
+gem "pry"
+gem "pry-byebug"

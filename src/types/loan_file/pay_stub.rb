@@ -1,4 +1,4 @@
-module Foobara
+module FoobaraDemo
   module LoanOrigination
     class LoanFile < Foobara::Entity
       class PayStub < Foobara::Model

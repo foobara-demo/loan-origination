@@ -19,7 +19,7 @@ module FoobaraDemo
       end
 
       def transition_loan_file
-        loan_file.state_machine.transition!(:approve)
+        loan_file.state_machine.perform_transition!(:approve)
       end
     end
   end

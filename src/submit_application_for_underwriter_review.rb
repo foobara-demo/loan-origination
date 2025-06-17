@@ -13,7 +13,7 @@ module FoobaraDemo
       end
 
       def transition_loan_file
-        loan_file.state_machine.transition!(:loan_file_complete)
+        loan_file.state_machine.perform_transition!(:loan_file_complete)
       end
     end
   end

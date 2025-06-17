@@ -3,7 +3,7 @@ module FoobaraDemo
     class AddCreditScore < Foobara::Command
       inputs do
         loan_file LoanFile, :required
-        credit_score CreditScore, :required
+        credit_score LoanFile::CreditScore, :required
       end
       result LoanFile
 

@@ -1,3 +1,5 @@
+require_relative "applicant"
+
 module FoobaraDemo
   module LoanOrigination
     class LoanFile < Foobara::Entity

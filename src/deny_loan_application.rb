@@ -5,7 +5,7 @@ module FoobaraDemo
 
       inputs do
         credit_score_used :integer, :required
-        denied_reasons [:denial_reason], :required
+        denied_reasons [:denied_reason], :required
         loan_file LoanFile, :required
       end
       result LoanFile
@@ -33,7 +33,7 @@ module FoobaraDemo
       end
 
       def transition_loan_file
-        loan_file.state_machine.transition!(:approve)
+        loan_file.state_machine.perform_transition!(:approve)
       end
     end
   end

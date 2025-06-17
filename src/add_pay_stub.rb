@@ -3,7 +3,7 @@ module FoobaraDemo
     class AddPayStub < Foobara::Command
       inputs do
         loan_file LoanFile, :required
-        pay_stub PayStub, :required
+        pay_stub LoanFile::PayStub, :required
       end
       result LoanFile
 

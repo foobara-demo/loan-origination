@@ -1,10 +1,9 @@
-module Foobara
+module FoobaraDemo
   module LoanOrigination
     class LoanFile < Foobara::Entity
       class Applicant < Foobara::Model
         attributes do
-          first_name :string, :required
-          last_name :string, :required
+          name :string, :required
         end
       end
     end

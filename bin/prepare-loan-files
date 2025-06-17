@@ -1,0 +1,55 @@
+#!/usr/bin/env ruby
+
+ENV["BUNDLE_GEMFILE"] ||= File.expand_path("./Gemfile", __dir__)
+require "bundler/setup"
+
+require_relative "../boot"
+
+FoobaraDemo::LoanOrigination::LoanFile.transaction do
+  FoobaraDemo::LoanOrigination::LoanFile.all.each(&:hard_delete!)
+end
+
+FoobaraDemo::LoanOrigination::CreditPolicy.transaction do
+  FoobaraDemo::LoanOrigination::CreditPolicy.all.each(&:hard_delete!)
+end
+
+bank_a = FoobaraDemo::LoanOrigination::CreateCreditPolicy.run!(
+  institutional_investor_name: "Bank A (less income verification, higher credit score required)",
+  minimum_credit_score: 700,
+  credit_score_to_use: :median,
+  required_pay_stub_quantity: 1
+)
+bank_b = FoobaraDemo::LoanOrigination::CreateCreditPolicy.run!(
+  institutional_investor_name: "Bank B (more income verification, lower credit score required)",
+  minimum_credit_score: 700,
+  credit_score_to_use: :maximum,
+  required_pay_stub_quantity: 2
+)
+bank_c = FoobaraDemo::LoanOrigination::CreateCreditPolicy.run!(
+  institutional_investor_name: "Bank C (less income verification, lower credit score required)",
+  minimum_credit_score: 700,
+  credit_score_to_use: :maximum,
+  required_pay_stub_quantity: 1
+)
+
+barbaras_loan_file = FoobaraDemo::LoanOrigination::StartLoanApplication.run!(
+  applicant: { name: "Barbara" },
+  credit_policy: bank_a
+)
+basils_loan_file = FoobaraDemo::LoanOrigination::StartLoanApplication.run!(
+  applicant: { name: "Basil" },
+  credit_policy: bank_b
+)
+fumikos_loan_file = FoobaraDemo::LoanOrigination::StartLoanApplication.run!(
+  applicant: { name: "Fumiko" },
+  credit_policy: bank_c
+)
+
+[barbaras_loan_file, basils_loan_file, fumikos_loan_file].each do |loan_file|
+  { experian: 500, equifax: 650, transunion: 750 }.each_pair do |reporting_agency, score|
+    FoobaraDemo::LoanOrigination::AddCreditScore.run!(loan_file:, credit_score: { reporting_agency:, score: })
+  end
+
+  FoobaraDemo::LoanOrigination::AddPayStub.run!(loan_file:, pay_stub: { amount: 4000, date: "2025-06-18" })
+  FoobaraDemo::LoanOrigination::SubmitApplicationForUnderwriterReview.run!(loan_file:)
+end

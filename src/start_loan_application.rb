@@ -1,7 +1,10 @@
 module FoobaraDemo
   module LoanOrigination
     class StartLoanApplication < Foobara::Command
-      inputs LoanApplication.attributes_for_create
+      inputs do
+        applicant LoanFile::Applicant.attributes_type
+        credit_policy CreditPolicy
+      end
       result LoanFile
 
       def execute
@@ -14,11 +17,11 @@ module FoobaraDemo
       attr_accessor :loan_file, :loan_application
 
       def create_application
-        self.loan_application = LoanApplication.create(inputs)
+        self.loan_application = LoanFile::LoanApplication.new(applicant:)
       end
 
       def create_loan_file
-        self.loan_file = LoanFile.create(loan_application:)
+        self.loan_file = LoanFile.create(loan_application:, credit_policy:)
       end
     end
   end

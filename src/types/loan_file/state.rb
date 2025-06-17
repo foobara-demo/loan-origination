@@ -4,6 +4,6 @@ module FoobaraDemo
       State = Foobara::Enumerated.make_module(LoanFile::StateMachine.states)
     end
 
-    foobara_register_type(:token_state, :symbol, one_of: Types::Token::State)
+    foobara_register_type(:state, :symbol, one_of: LoanFile::State)
   end
 end
