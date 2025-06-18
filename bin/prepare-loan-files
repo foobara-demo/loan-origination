@@ -12,21 +12,23 @@ end
 FoobaraDemo::LoanOrigination::CreditPolicy.transaction do
   FoobaraDemo::LoanOrigination::CreditPolicy.all.each(&:hard_delete!)
 end
-
+# less income verification, higher credit score required
 bank_a = FoobaraDemo::LoanOrigination::CreateCreditPolicy.run!(
-  institutional_investor_name: "Bank A (less income verification, higher credit score required)",
+  institutional_investor_name: "Bank A",
   minimum_credit_score: 700,
   credit_score_to_use: :median,
   required_pay_stub_quantity: 1
 )
+# more income verification, lower credit score required
 bank_b = FoobaraDemo::LoanOrigination::CreateCreditPolicy.run!(
-  institutional_investor_name: "Bank B (more income verification, lower credit score required)",
+  institutional_investor_name: "Bank B",
   minimum_credit_score: 700,
   credit_score_to_use: :maximum,
   required_pay_stub_quantity: 2
 )
+# less income verification, lower credit score required
 bank_c = FoobaraDemo::LoanOrigination::CreateCreditPolicy.run!(
-  institutional_investor_name: "Bank C (less income verification, lower credit score required)",
+  institutional_investor_name: "Bank C",
   minimum_credit_score: 700,
   credit_score_to_use: :maximum,
   required_pay_stub_quantity: 1
