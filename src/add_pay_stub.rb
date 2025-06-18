@@ -1,8 +1,10 @@
 module FoobaraDemo
   module LoanOrigination
     class AddPayStub < Foobara::Command
+      description "Add a pay stub to a loan file"
+
       inputs do
-        loan_file LoanFile, :required
+        loan_file LoanFile, :required, "Which loan file to add this pay stub to"
         pay_stub LoanFile::PayStub, :required
       end
       result LoanFile

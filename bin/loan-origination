@@ -11,5 +11,6 @@ connector = Foobara::CommandConnectors::ShCliConnector.new
 
 connector.connect(FoobaraDemo::LoanOrigination::FindAllLoanFiles)
 connector.connect(FoobaraDemo::LoanOrigination::GenerateLoanFilesReport)
+connector.connect(FoobaraDemo::LoanOrigination::AddPayStub)
 
 connector.run
