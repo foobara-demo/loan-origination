@@ -1,4 +1,17 @@
 PATH
+  remote: ../../../foobara/agent-cli
+  specs:
+    foobara-agent-cli (0.0.3)
+      foobara-agent (~> 0.0.1)
+
+PATH
+  remote: ../../../foobara/agent
+  specs:
+    foobara-agent (0.0.5)
+      foobara (~> 0.0.126)
+      foobara-llm-backed-command (~> 0.0.1)
+
+PATH
   remote: ../../../foobara/foobara
   specs:
     foobara (0.0.131)
@@ -22,11 +35,6 @@ GEM
     date (3.4.1)
     dotenv (3.1.8)
     erb (5.0.1)
-    foobara-agent (0.0.5)
-      foobara (~> 0.0.126)
-      foobara-llm-backed-command (~> 0.0.1)
-    foobara-agent-cli (0.0.3)
-      foobara-agent (~> 0.0.1)
     foobara-ai (0.0.12)
     foobara-anthropic-api (0.0.10)
       foobara-cached-command
@@ -86,7 +94,8 @@ PLATFORMS
 
 DEPENDENCIES
   foobara!
-  foobara-agent-cli
+  foobara-agent!
+  foobara-agent-cli!
   foobara-anthropic-api
   foobara-demo-loan-origination!
   foobara-dotenv-loader

@@ -11,7 +11,6 @@ module FoobaraDemo
       result LoanFile
 
       def execute
-        validate_denied_reasons
         create_underwriting_decision
         transition_loan_file
 
@@ -25,7 +24,7 @@ module FoobaraDemo
       end
 
       def create_underwriting_decision
-        loan_file.underwriter_decision = UnderwriterDecision.create(
+        loan_file.underwriter_decision = LoanFile::UnderwriterDecision.new(
           decision: :denied,
           credit_score_used:,
           denied_reasons:
@@ -33,7 +32,7 @@ module FoobaraDemo
       end
 
       def transition_loan_file
-        loan_file.state_machine.perform_transition!(:approve)
+        loan_file.state_machine.perform_transition!(:deny)
       end
     end
   end

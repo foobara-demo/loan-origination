@@ -51,6 +51,10 @@ fumikos_loan_file = FoobaraDemo::LoanOrigination::StartLoanApplication.run!(
     FoobaraDemo::LoanOrigination::AddCreditScore.run!(loan_file:, credit_score: { reporting_agency:, score: })
   end
 
-  FoobaraDemo::LoanOrigination::AddPayStub.run!(loan_file:, pay_stub: { amount: 4000, date: "2025-06-18" })
+  FoobaraDemo::LoanOrigination::AddPayStub.run!(loan_file:, pay_stub: {
+                                                  amount: 4000,
+                                                  date: "2025-06-18",
+                                                  employer: "Some Employer"
+                                                })
   FoobaraDemo::LoanOrigination::SubmitApplicationForUnderwriterReview.run!(loan_file:)
 end

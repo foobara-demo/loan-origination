@@ -15,7 +15,7 @@ module FoobaraDemo
       end
 
       def create_underwriting_decision
-        loan_file.underwriter_decision = UnderwriterDecision.create(decision: :approved, credit_score_used:)
+        loan_file.underwriter_decision = LoanFile::UnderwriterDecision.new(decision: :approved, credit_score_used:)
       end
 
       def transition_loan_file

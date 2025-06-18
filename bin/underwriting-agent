@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+
+ENV["BUNDLE_GEMFILE"] ||= File.expand_path("./Gemfile", __dir__)
+require "bundler/setup"
+
+# add your keys/urls to .env or set them some other way and delete these two lines
+require "foobara/load_dotenv"
+Foobara::LoadDotenv.run!(dir: __dir__)
+
+require "foobara/anthropic_api" if ENV.key?("ANTHROPIC_API_KEY")
+require "foobara/open_ai_api" if ENV.key?("OPENAI_API_KEY")
+# require "foobara/ollama_api" if ENV.key?("OLLAMA_API_URL")
+
+require_relative "../boot"
+
+require "foobara/agent_cli"
+
+# llm_model = "chatgpt-4o-latest"
+# llm_model = "claude-3-7-sonnet-20250219"
+# llm_model = "claude-opus-4-20250514"
+llm_model = "claude-sonnet-4-20250514"
+
+agent = Foobara::Agent.new(agent_name: "UnderwritingAgent", llm_model:)
+
+agent.connect(FoobaraDemo::LoanOrigination::FindALoanFileThatNeedsReview)
+agent.connect(FoobaraDemo::LoanOrigination::StartUnderwriterReview)
+agent.connect(FoobaraDemo::LoanOrigination::ApproveLoanFile)
+agent.connect(FoobaraDemo::LoanOrigination::DenyLoanFile)
+
+agent.run_cli

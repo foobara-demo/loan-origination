@@ -3,9 +3,9 @@ module FoobaraDemo
     class LoanFile < Foobara::Entity
       class PayStub < Foobara::Model
         attributes do
-          amount :integer
-          date :date
-          employer :string
+          amount :integer, :required
+          date :date, :required
+          employer :string, :required
         end
       end
     end
