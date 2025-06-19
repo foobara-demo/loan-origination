@@ -21,7 +21,7 @@ require "foobara/agent_cli"
 # llm_model = "claude-opus-4-20250514"
 llm_model = "claude-sonnet-4-20250514"
 
-agent = Foobara::Agent.new(agent_name: "UnderwritingAgent", llm_model:)
+agent = Foobara::Agent.new(agent_name: "UnderwritingAgent", llm_model:, verbose: true)
 
 agent.connect(FoobaraDemo::LoanOrigination::FindALoanFileThatNeedsReview)
 agent.connect(FoobaraDemo::LoanOrigination::StartUnderwriterReview)
