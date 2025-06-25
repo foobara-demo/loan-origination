@@ -18,7 +18,7 @@ GEM
       foobara-lru-cache (~> 0.0.2)
       foobara-util (>= 1.0.0)
       inheritable-thread-vars (~> 0.0.1)
-    foobara-agent (0.0.6)
+    foobara-agent (0.0.7)
       foobara (~> 0.0.126)
       foobara-llm-backed-command (~> 0.0.1)
     foobara-agent-cli (0.0.4)
