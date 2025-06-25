@@ -5,4 +5,4 @@ require "bundler/setup"
 
 require_relative "../boot"
 
-FoobaraDemo::LoanOrigination::PrepareDemoRecords.run!
+FoobaraDemo::LoanOrigination::Demo::PrepareDemoRecords.run!
