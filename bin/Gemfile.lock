@@ -2,7 +2,7 @@ PATH
   remote: ..
   specs:
     foobara-demo-loan-origination (0.0.1)
-      foobara (~> 0.0.131)
+      foobara-local-files-crud-driver (~> 0.0.1)
 
 GEM
   remote: https://rubygems.org/

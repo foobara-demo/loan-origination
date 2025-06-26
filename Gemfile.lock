@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     foobara-demo-loan-origination (0.0.1)
-      foobara (~> 0.0.131)
+      foobara-local-files-crud-driver (~> 0.0.1)
 
 GEM
   remote: https://rubygems.org/
@@ -26,16 +26,7 @@ GEM
       foobara (~> 0.0.102)
       foobara-sh-cli-connector (~> 0.0.1)
     ffi (1.17.2)
-    ffi (1.17.2-aarch64-linux-gnu)
-    ffi (1.17.2-aarch64-linux-musl)
-    ffi (1.17.2-arm-linux-gnu)
-    ffi (1.17.2-arm-linux-musl)
-    ffi (1.17.2-arm64-darwin)
-    ffi (1.17.2-x86-linux-gnu)
-    ffi (1.17.2-x86-linux-musl)
-    ffi (1.17.2-x86_64-darwin)
     ffi (1.17.2-x86_64-linux-gnu)
-    ffi (1.17.2-x86_64-linux-musl)
     foob (0.0.14)
       foobara (~> 0.0.116)
       foobara-command-generator (~> 0.0.1)
@@ -81,6 +72,8 @@ GEM
       foobara-files-generator (~> 0.0.1)
     foobara-files-generator (0.0.7)
       foobara (~> 0.0.116)
+    foobara-local-files-crud-driver (0.0.10)
+      foobara (~> 0.0.102)
     foobara-local-files-crud-driver-generator (0.0.3)
       foobara
       foobara-files-generator
@@ -249,17 +242,7 @@ GEM
       hashdiff (>= 0.4.0, < 2.0.0)
 
 PLATFORMS
-  aarch64-linux-gnu
-  aarch64-linux-musl
-  arm-linux-gnu
-  arm-linux-musl
-  arm64-darwin
-  ruby
-  x86-linux-gnu
-  x86-linux-musl
-  x86_64-darwin
   x86_64-linux-gnu
-  x86_64-linux-musl
 
 DEPENDENCIES
   foob

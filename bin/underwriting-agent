@@ -27,5 +27,6 @@ agent.connect(FoobaraDemo::LoanOrigination::FindALoanFileThatNeedsReview)
 agent.connect(FoobaraDemo::LoanOrigination::StartUnderwriterReview)
 agent.connect(FoobaraDemo::LoanOrigination::ApproveLoanFile)
 agent.connect(FoobaraDemo::LoanOrigination::DenyLoanFile)
+agent.connect(FoobaraDemo::LoanOrigination::FindCreditPolicy)
 
 agent.run_cli

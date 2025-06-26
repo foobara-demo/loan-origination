@@ -6,14 +6,14 @@ module FoobaraDemo
           loan_file_complete: :needs_review
         },
         needs_review: {
-          start_review: :in_review,
+          start_review: :in_review
         },
         in_review: {
           deny: :denied,
           approve: :drafting_docs
         },
         drafting_docs: {
-          sign: :in_escrow,
+          sign: :in_escrow
         },
         in_escrow: {
           record: :recorded
