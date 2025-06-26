@@ -6,6 +6,8 @@ module FoobaraDemo
       end
       result LoanFile
 
+      load_all
+
       def execute
         loan_file
       end
