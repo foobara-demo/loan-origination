@@ -45,28 +45,31 @@ module FoobaraDemo
 
         def create_credit_policy_that_uses_median_fico
           self.credit_policy_that_uses_median_fico = run_subcommand!(
-            CreateCreditPolicy, institutional_investor_name: "Bank A",
+            CreateCreditPolicy, institution: "Bank A",
+
                                 minimum_credit_score: 700,
                                 credit_score_to_use: :median,
-                                required_pay_stub_quantity: 1
+                                minimum_pay_stub_count: 1
           )
         end
 
         def create_credit_policy_that_requires_more_pay_stubs
           self.credit_policy_that_requires_more_pay_stubs = run_subcommand!(
-            CreateCreditPolicy, institutional_investor_name: "Bank B",
+            CreateCreditPolicy, institution: "Bank B",
+
                                 minimum_credit_score: 700,
                                 credit_score_to_use: :maximum,
-                                required_pay_stub_quantity: 2
+                                minimum_pay_stub_count: 2
           )
         end
 
         def create_lenient_credit_policy
           self.lenient_credit_policy = run_subcommand!(
-            CreateCreditPolicy, institutional_investor_name: "Bank C",
+            CreateCreditPolicy, institution: "Bank C",
+
                                 minimum_credit_score: 700,
                                 credit_score_to_use: :maximum,
-                                required_pay_stub_quantity: 1
+                                minimum_pay_stub_count: 1
           )
         end
 

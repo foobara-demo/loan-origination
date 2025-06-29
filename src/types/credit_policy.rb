@@ -3,14 +3,16 @@ module FoobaraDemo
     class CreditPolicy < Foobara::Entity
       attributes do
         id :integer
-        institutional_investor_name :string, :required
+        institution :string, :required
+        minimum_pay_stub_count :integer, :required,
+                               "The loan file must have at least this many pay stubs."
         minimum_credit_score :integer, :required
         credit_score_to_use :symbol,
                             :required,
                             one_of: [:median, :maximum],
                             description: "If the scores are 500, 650, and 700, then " \
-                                         ":maximum will use 700 and :median will use 650"
-        required_pay_stub_quantity :integer, :required
+                                         "maximum will compare the biggest (700) against minimum_credit_score " \
+                                         "and median will compare the median (650) against minimum_credit_score."
       end
 
       primary_key :id
