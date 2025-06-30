@@ -1,4 +1,10 @@
 PATH
+  remote: ../../../foobara/agent-backed-command
+  specs:
+    foobara-agent-backed-command (0.0.1)
+      foobara-agent (>= 0.0.1)
+
+PATH
   remote: ..
   specs:
     foobara-demo-loan-origination (0.0.1)
@@ -13,18 +19,18 @@ GEM
     date (3.4.1)
     dotenv (3.1.8)
     erb (5.0.1)
-    foobara (0.0.132)
+    foobara (0.0.134)
       bigdecimal
       foobara-lru-cache (~> 0.0.2)
       foobara-util (>= 1.0.0)
       inheritable-thread-vars (~> 0.0.1)
-    foobara-agent (0.0.7)
+    foobara-agent (0.0.10)
       foobara (~> 0.0.126)
       foobara-llm-backed-command (~> 0.0.1)
     foobara-agent-cli (0.0.4)
       foobara-agent (~> 0.0.1)
-    foobara-ai (0.0.12)
-    foobara-anthropic-api (0.0.10)
+    foobara-ai (0.0.13)
+    foobara-anthropic-api (0.0.11)
       foobara-cached-command
       foobara-http-api-command
     foobara-cached-command (0.0.2)
@@ -35,16 +41,16 @@ GEM
       foobara
     foobara-json-schema-generator (0.0.6)
       foobara (~> 0.0.92)
-    foobara-llm-backed-command (0.0.8)
+    foobara-llm-backed-command (0.0.9)
       foobara (~> 0.0.132)
       foobara-ai (~> 0.0.1)
       foobara-json-schema-generator (~> 0.0.6)
     foobara-local-files-crud-driver (0.0.10)
       foobara (~> 0.0.102)
     foobara-lru-cache (0.0.2)
-    foobara-ollama-api (0.0.4)
+    foobara-ollama-api (0.0.5)
       foobara-http-api-command
-    foobara-open-ai-api (0.0.12)
+    foobara-open-ai-api (0.0.13)
       foobara-cached-command
       foobara-http-api-command
     foobara-sh-cli-connector (0.0.18)
@@ -81,6 +87,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  foobara-agent-backed-command!
   foobara-agent-cli
   foobara-anthropic-api
   foobara-demo-loan-origination!

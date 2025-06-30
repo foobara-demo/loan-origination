@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+
+ENV["BUNDLE_GEMFILE"] ||= File.expand_path("./Gemfile", __dir__)
+require "bundler/setup"
+
+# add your keys/urls to .env or set them some other way and delete these two lines
+require "foobara/load_dotenv"
+Foobara::LoadDotenv.run!(dir: __dir__)
+
+require "foobara/anthropic_api" if ENV.key?("ANTHROPIC_API_KEY")
+require "foobara/open_ai_api" if ENV.key?("OPENAI_API_KEY")
+# require "foobara/ollama_api" if ENV.key?("OLLAMA_API_URL")
+
+require "foobara/sh_cli_connector"
+require "foobara/agent_backed_command"
+
+require_relative "../boot"
+
+class FoobaraDemo::LoanOrigination::ReviewAllLoanFilesNeedingReview < Foobara::AgentBackedCommand
+  description "Checks each LoanFile needing review against all requirements in its CreditPolicy. " \
+              "If any requirement is not satisfied, it will be denied. Otherwise, approved"
+
+  result do
+    approved [{ applicant_name: :string }]
+    denied [{ applicant_name: :string, denied_reasons: [:denied_reason] }]
+  end
+end
+
+connector = Foobara::CommandConnectors::ShCliConnector.new
+connector.connect(FoobaraDemo::LoanOrigination)
+connector.run

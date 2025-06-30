@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
+gem "foobara-agent-backed-command", path: "../../../foobara/agent-backed-command"
 gem "foobara-demo-loan-origination", path: ".."
 
 # gem "foobara", path: "../../../foobara/foobara"
