@@ -1,12 +1,12 @@
 source "https://rubygems.org"
 
-gem "foobara-agent-backed-command", path: "../../../foobara/agent-backed-command"
 gem "foobara-demo-loan-origination", path: ".."
 
 # gem "foobara", path: "../../../foobara/foobara"
 # gem "foobara-agent", path: "../../../foobara/agent"
 # gem "foobara-json-schema-generator", path: "../../../foobara/json-schema-generator"
 
+gem "foobara-agent-backed-command" # , path: "../../../foobara/agent-backed-command"
 gem "foobara-agent-cli" # , path: "../../../foobara/agent-cli"
 gem "foobara-anthropic-api"
 gem "foobara-dotenv-loader"

@@ -1,8 +1,11 @@
 PATH
-  remote: ../../../foobara/agent-backed-command
+  remote: ../../../foobara/foobara
   specs:
-    foobara-agent-backed-command (0.0.1)
-      foobara-agent (>= 0.0.1)
+    foobara (0.0.135)
+      bigdecimal
+      foobara-lru-cache (~> 0.0.2)
+      foobara-util (>= 1.0.0)
+      inheritable-thread-vars (~> 0.0.1)
 
 PATH
   remote: ..
@@ -19,14 +22,11 @@ GEM
     date (3.4.1)
     dotenv (3.1.8)
     erb (5.0.1)
-    foobara (0.0.135)
-      bigdecimal
-      foobara-lru-cache (~> 0.0.2)
-      foobara-util (>= 1.0.0)
-      inheritable-thread-vars (~> 0.0.1)
     foobara-agent (0.0.11)
       foobara (~> 0.0.126)
       foobara-llm-backed-command (~> 0.0.1)
+    foobara-agent-backed-command (0.0.1)
+      foobara-agent (>= 0.0.1)
     foobara-agent-cli (0.0.4)
       foobara-agent (~> 0.0.1)
     foobara-ai (0.0.13)
@@ -75,7 +75,7 @@ GEM
     psych (5.2.6)
       date
       stringio
-    rdoc (6.14.1)
+    rdoc (6.14.2)
       erb
       psych (>= 4.0.0)
     reline (0.6.1)
@@ -87,7 +87,8 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  foobara-agent-backed-command!
+  foobara!
+  foobara-agent-backed-command
   foobara-agent-cli
   foobara-anthropic-api
   foobara-demo-loan-origination!
