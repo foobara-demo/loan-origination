@@ -16,27 +16,28 @@ require "foobara/agent_backed_command"
 
 require_relative "../boot"
 
+raise "this doesn't work at all! Maybe debug this when there's time?"
+# :nocov:
 module FoobaraDemo
   module LoanOrigination
     class ReviewLoanFile < Foobara::AgentBackedCommand
-      description "Starts the LoanFile's review, then checks all requirements of its " \
-                  "CreditPolicy and approves it if and only if all requirements are met. Otherwise denies it."
+      description "Denies the LoanFile if its CreditPolicy has any unmet requirements. Otherwise approves it."
 
       add_inputs do
         loan_file LoanFile, :required
       end
 
-      result LoanFile::UnderwriterDecision
+      # result LoanFile::UnderwriterDecision
 
       depends_on StartUnderwriterReview,
-                 FindCreditPolicy,
+                 # FindCreditPolicy,
                  DenyLoanFile,
                  ApproveLoanFile
 
       verbose
+      pass_aggregates_to_llm
       # works:
-      # llm_model  "claude-opus-4-20250514"
-      agent_name "Inner"
+      llm_model "claude-opus-4-20250514"
       # llm_model "o1"
 
       # Does not seem to work... doesn't return proper json for denying a loan.
@@ -44,29 +45,64 @@ module FoobaraDemo
       # Does not work: incorrectly denies Fumiko's loan file.
       # llm_model "claude-sonnet-4-20250514"
       # Incorrectly denies Fumiko
-      llm_model "claude-3-7-sonnet-20250219"
+      # llm_model "claude-3-7-sonnet-20250219"
       # Incorrectly denies Fumiko, incorrectly approves Basil
       # llm_model "gpt-4o"
 
       # llm_model "qwen3:8b"
       # llm_model "gpt-4o-mini"
-
-      # pass_aggregates_to_llm
     end
 
-    class ReviewAllLoanFiles < Foobara::AgentBackedCommand
+    class ReviewAllLoanFilesNeedingReview < Foobara::Command
       description "Reviews all LoanFiles that need review."
-
-      result do
-        approved [LoanFile], :required
-        denied [LoanFile], :required
-      end
 
       depends_on FindALoanFileThatNeedsReview,
                  ReviewLoanFile
-      verbose
-      agent_name "Outer"
 
+      def execute
+        each_loan_file_that_needs_review do
+          review_loan_file_async
+        end
+
+        wait_for_all_reviews
+        raise_if_any_failed
+
+        nil
+      end
+
+      attr_accessor :loan_file
+
+      def each_loan_file_that_needs_review
+        loop do
+          self.loan_file = run_subcommand!(FindALoanFileThatNeedsReview)
+          break unless loan_file
+
+          yield
+        end
+      end
+
+      def threads
+        @threads ||= []
+      end
+
+      def review_loan_file_async
+        threads << Thread.new do
+          LoanFile.transaction(mode: :open_new) do
+            ReviewLoanFile.run(loan_file: loan_file.id)
+          end
+        end
+      end
+
+      def wait_for_all_reviews
+        threads.join
+      end
+
+      def raise_if_any_failed
+        threads.each do |thread|
+          outcome = thread.value
+          outcome.raise!
+        end
+      end
       # works:
       # llm_model "claude-sonnet-4-20250514"
       # llm_model "claude-opus-4-20250514"
@@ -80,32 +116,17 @@ module FoobaraDemo
       # llm_model "gpt-4o-mini"
 
       # llm_model "o1"
-      # llm_model "claude-3-sonnet-20240229"
-      llm_model "gpt-4"
     end
   end
 end
 
-outcome = FoobaraDemo::LoanOrigination::ReviewAllLoanFiles.run
+outcome = FoobaraDemo::LoanOrigination::ReviewAllLoanFilesNeedingReview.run
 
 if outcome.success?
-  result = outcome.result
-
   puts
   puts "Great success!!"
   puts
-
-  approved = result[:approved]
-  denied = result[:denied]
-
-  approved.each do |loan_file|
-    puts "Approved: #{loan_file.loan_application.applicant.name}"
-  end
-
-  denied.each do |loan_file|
-    puts "Denied: #{loan_file.loan_application.applicant.name} " \
-         "(#{loan_file.underwriter_decision.denied_reasons.join(", ")})"
-  end
 else
   warn "Error: #{outcome.errors_hash}"
 end
+# :nocov:

@@ -19,7 +19,7 @@ require_relative "../boot"
 module FoobaraDemo
   module LoanOrigination
     class ReviewAllLoanFilesNeedingReview < Foobara::AgentBackedCommand
-      description "Checks each LoanFile all requirements in its CreditPolicy. " \
+      description "Checks each LoanFile against all requirements in its CreditPolicy. " \
                   "Denies each LoanFile that has any unsatisfied requirements."
 
       result do
@@ -34,6 +34,40 @@ module FoobaraDemo
                  DenyLoanFile
 
       verbose
+      # works:
+      llm_model "claude-3-7-sonnet-20250219"
+      # llm_model "chatgpt-4o-latest"
+      # llm_model "claude-opus-4-20250514"
+      # llm_model "claude-sonnet-4-20250514"
+      # llm_model "gpt-4o"
+      # llm_model "o1"
+      # llm_model "claude-3-5-sonnet-20241022"
+      # llm_model "claude-3-opus-20240229"
+      # llm_model "gpt-4"
+      # llm_model "gpt-4.1"
+
+      # Does not work: Only processes the first loan file.
+      # Rerunning it to hit all loan files, it incorrectly approves Basil
+      # llm_model "gpt-4-turbo"
+      # Does not work: incorrectly denies Fumiko, gives wrong reasons for Basil
+      # llm_model "claude-3-5-haiku-20241022"
+      # Does not work: gave up couldn't give proper command and inputs
+      # llm_model "gpt-3.5-turbo"
+      # Does not work: only processes the first loan file
+      # Rerunning it to hit all loans, it gives wrong reasons for Basil but gets Fumiko right
+      # llm_model "claude-3-sonnet-20240229"
+      # Does not work: only processes the first loan file and incorrectly approves it
+      # llm_model "claude-3-haiku-20240307"
+
+      # Does not work: does not fetch the credit policy, incorrectly approves it, and only processes the first loan
+      # llm_model "deepseek-r1:70b"
+      # llm_model "deepseek-r1:32b"
+
+      # TODO: fix this! gives a 400 likely due to temperature?
+      # llm_model "o1-mini"
+      # llm_model "o3-mini"
+      # llm_model "o3-mini-2025-01-31"
+      # llm_model "o4-mini"
     end
   end
 end
