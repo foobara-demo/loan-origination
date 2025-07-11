@@ -14,7 +14,7 @@ module FoobaraDemo
           delete_all_loan_files
           delete_all_credit_policies
 
-          create_credit_policy_that_uses_median_fico
+          create_credit_policy_that_requires_better_fico_scores
           create_credit_policy_that_requires_more_pay_stubs
           create_lenient_credit_policy
 
@@ -29,7 +29,7 @@ module FoobaraDemo
           demo_loan_files
         end
 
-        attr_accessor :credit_policy_that_uses_median_fico,
+        attr_accessor :credit_policy_that_requires_better_fico_scores,
                       :credit_policy_that_requires_more_pay_stubs,
                       :lenient_credit_policy,
                       :demo_loan_files,
@@ -43,8 +43,8 @@ module FoobaraDemo
           CreditPolicy.all.each(&:hard_delete!)
         end
 
-        def create_credit_policy_that_uses_median_fico
-          self.credit_policy_that_uses_median_fico = run_subcommand!(
+        def create_credit_policy_that_requires_better_fico_scores
+          self.credit_policy_that_requires_better_fico_scores = run_subcommand!(
             CreateCreditPolicy, institution: "Bank A",
 
                                 minimum_credit_score: 700,
@@ -75,7 +75,7 @@ module FoobaraDemo
 
         def create_demo_loan_files
           name_to_credit_policy = {
-            Barbara: credit_policy_that_uses_median_fico,
+            Barbara: credit_policy_that_requires_better_fico_scores,
             Basil: credit_policy_that_requires_more_pay_stubs,
             Fumiko: lenient_credit_policy
           }

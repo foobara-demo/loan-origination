@@ -38,7 +38,7 @@ module FoobaraDemo
           }
 
           if underwriter_decision
-            report[:underwriter_decision] = underwriter_decision.attributes
+            report[:underwriter_decision] = underwriter_decision
           end
 
           report
