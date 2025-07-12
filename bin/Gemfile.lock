@@ -1,17 +1,4 @@
 PATH
-  remote: ../../../foobara/agent-backed-command
-  specs:
-    foobara-agent-backed-command (0.0.4)
-      foobara-agent (>= 0.0.1, < 2.0.0)
-
-PATH
-  remote: ../../../foobara/agent
-  specs:
-    foobara-agent (0.0.17)
-      foobara (>= 0.0.136, < 2.0.0)
-      foobara-llm-backed-command (>= 1.0.0, < 2.0.0)
-
-PATH
   remote: ..
   specs:
     foobara-demo-loan-origination (0.0.1)
@@ -31,6 +18,11 @@ GEM
       foobara-lru-cache (~> 0.0.2)
       foobara-util (>= 1.0.0)
       inheritable-thread-vars (~> 0.0.1)
+    foobara-agent (0.0.17)
+      foobara (>= 0.0.136, < 2.0.0)
+      foobara-llm-backed-command (>= 1.0.0, < 2.0.0)
+    foobara-agent-backed-command (0.0.4)
+      foobara-agent (>= 0.0.1, < 2.0.0)
     foobara-agent-cli (0.0.4)
       foobara-agent (~> 0.0.1)
     foobara-ai (1.0.0)
@@ -43,8 +35,8 @@ GEM
       dotenv
     foobara-http-api-command (0.0.9)
       foobara
-    foobara-json-schema-generator (1.0.0)
-      foobara (~> 0.0.92)
+    foobara-json-schema-generator (1.0.1)
+      foobara (>= 0.0.136, < 2.0.0)
     foobara-llm-backed-command (1.0.1)
       foobara (>= 0.0.136, < 2.0.0)
       foobara-ai (>= 1.0.0, < 2.0.0)
@@ -91,8 +83,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  foobara-agent!
-  foobara-agent-backed-command!
+  foobara-agent-backed-command
   foobara-agent-cli
   foobara-anthropic-api
   foobara-demo-loan-origination!

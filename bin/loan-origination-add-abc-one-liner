@@ -18,42 +18,42 @@ require "foobara/agent_backed_command"
 
 connector = Foobara::CommandConnectors::ShCliConnector.new
 
-# class FoobaraDemo::LoanOrigination::MakeUnderwriterDecisionForAllLoanFilesNeedingReview < Foobara::AgentBackedCommand
-#   # works:
-#   # llm_model "claude-3-7-sonnet-20250219"
-#   # llm_model "claude-sonnet-4-20250514"
-#   # llm_model "o1"
-#
-#   # Does not work: just approves everything
-#   # llm_model "claude-opus-4-20250514"
-#   # Does not work: incorrectly approves Barbara
-#   # llm_model "chatgpt-4o-latest"
-#
-#   # llm_model "deepseek-r1:70b"
-#   # llm_model "deepseek-r1:32b"
-#   # llm_model "qwen3:??"
-# end
-# class FoobaraDemo::LoanOrigination::MakeUnderwriterDecisionForAllLoanFilesNeedingReview < Foobara::AgentBackedCommand
-# works:
-# llm_model "claude-3-7-sonnet-20250219"
-# llm_model "claude-sonnet-4-20250514"
-# llm_model "o1"
+class FoobaraDemo::LoanOrigination::ReviewAllLoanFiles < Foobara::AgentBackedCommand
+  #   # works:
+  #   # llm_model "claude-3-7-sonnet-20250219"
+  #   # llm_model "claude-sonnet-4-20250514"
+  #   # llm_model "o1"
+  #
+  #   # Does not work: just approves everything
+  #   # llm_model "claude-opus-4-20250514"
+  #   # Does not work: incorrectly approves Barbara
+  #   # llm_model "chatgpt-4o-latest"
+  #
+  #   # llm_model "deepseek-r1:70b"
+  #   # llm_model "deepseek-r1:32b"
+  #   # llm_model "qwen3:??"
+  # end
+  # class FoobaraDemo::LoanOrigination::MakeUnderwriterDecisionForAllLoanFilesNeedingReview < Foobara::AgentBackedCommand
+  # works:
+  # llm_model "claude-3-7-sonnet-20250219"
+  # llm_model "claude-sonnet-4-20250514"
+  # llm_model "o1"
 
-# Does not work: just approves everything
-# llm_model "claude-opus-4-20250514"
-# Does not work: incorrectly approves Barbara
-# llm_model "chatgpt-4o-latest"
+  # Does not work: just approves everything
+  # llm_model "claude-opus-4-20250514"
+  # Does not work: incorrectly approves Barbara
+  # llm_model "chatgpt-4o-latest"
 
-# llm_model "deepseek-r1:70b"
-# llm_model "deepseek-r1:32b"
-# llm_model "qwen3:??"
+  # llm_model "deepseek-r1:70b"
+  # llm_model "deepseek-r1:32b"
+  # llm_model "qwen3:??"
 
-# pass_aggregates_to_llm
-# end
-# class FoobaraDemo::LoanOrigination::DenyOrApproveAllLoanFilesNeedingReview < Foobara::AgentBackedCommand
-#   # works:
-#   llm_model "claude-3-7-sonnet-20250219"
-# end
+  # pass_aggregates_to_llm
+  # end
+  # class FoobaraDemo::LoanOrigination::DenyOrApproveAllLoanFilesNeedingReview < Foobara::AgentBackedCommand
+  #   # works:
+  #   llm_model "claude-3-7-sonnet-20250219"
+end
 
 # class FoobaraDemo::LoanOrigination::ReviewAllLoanFilesNeedingReview < Foobara::AgentBackedCommand
 #   # works:
@@ -99,35 +99,35 @@ connector = Foobara::CommandConnectors::ShCliConnector.new
 #   # llm_model "deepseek-r1:32b"
 #   # llm_model "qwen3:??"
 # end
-module FoobaraDemo
-  module LoanOrigination
-    class ReviewAllLoanFiles < Foobara::AgentBackedCommand
-      #   description "Checks each LoanFile that needs review against all requirements in its CreditPolicy. " \
-      #               "If any requirement is not satisfied, it will deny the loan file. " \
-      #               "Otherwise, it will approve the loan file."
+# module FoobaraDemo
+#   module LoanOrigination
+#     class ReviewAllLoanFiles < Foobara::AgentBackedCommand
+#       #   description "Checks each LoanFile that needs review against all requirements in its CreditPolicy. " \
+#       #               "If any requirement is not satisfied, it will deny the loan file. " \
+#       #               "Otherwise, it will approve the loan file."
+#
+#       depends_on FindALoanFileThatNeedsReview,
+#                  StartUnderwriterReview,
+#                  FindCreditPolicy,
+#                  DenyLoanFile,
+#                  ApproveLoanFile
 
-      depends_on FindALoanFileThatNeedsReview,
-                 StartUnderwriterReview,
-                 FindCreditPolicy,
-                 DenyLoanFile,
-                 ApproveLoanFile
+# works:
+# llm_model "claude-opus-4-20250514"
+# llm_model "claude-sonnet-4-20250514"
+# llm_model "chatgpt-4o-latest"
+# llm_model "o1"
 
-      # works:
-      # llm_model "claude-opus-4-20250514"
-      # llm_model "claude-sonnet-4-20250514"
-      # llm_model "chatgpt-4o-latest"
-      # llm_model "o1"
-
-      # Used to work but now doesn't wtf...
-      llm_model "claude-3-7-sonnet-20250219"
-
-      # llm_model "deepseek-r1:70b"
-      # llm_model "deepseek-r1:32b"
-      # llm_model "qwen3:??"
-      # pass_aggregates_to_llm
-    end
-  end
-end
+# Used to work but now doesn't wtf...
+#       llm_model "claude-3-7-sonnet-20250219"
+#
+#       # llm_model "deepseek-r1:70b"
+#       # llm_model "deepseek-r1:32b"
+#       # llm_model "qwen3:??"
+#       # pass_aggregates_to_llm
+#     end
+#   end
+# end
 # class FoobaraDemo::LoanOrigination::ReviewAllLoanFilesNeedingReview < Foobara::AgentBackedCommand
 #   #   description "Checks each LoanFile that needs review against all requirements in its CreditPolicy. " \
 #   #               "If any requirement is not satisfied, it will deny the loan file. " \

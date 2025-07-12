@@ -17,7 +17,7 @@ require "foobara/agent_cli"
 
 # works:
 # llm_model = "claude-sonnet-4-20250514"
-# llm_model = "claude-3-7-sonnet-20250219"
+llm_model = "claude-3-7-sonnet-20250219"
 # llm_model = "claude-opus-4-20250514"
 
 # Incorrectly approved the first loan without checking the credit policy at all.
