@@ -10,13 +10,11 @@ module FoobaraDemo
         loan_file LoanFile, :required
       end
 
-      result LoanFile
-
       def execute
         create_underwriting_decision
         transition_loan_file
 
-        loan_file
+        nil
       end
 
       def validate

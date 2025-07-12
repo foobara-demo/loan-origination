@@ -4,12 +4,11 @@ module FoobaraDemo
       inputs do
         loan_file LoanFile, :required
       end
-      result LoanFile
 
       def execute
         transition_loan_file
 
-        loan_file
+        nil
       end
 
       def transition_loan_file
