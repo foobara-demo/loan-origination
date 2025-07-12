@@ -114,7 +114,7 @@ GEM
     foobara-typescript-remote-command-generator (0.0.24)
       foobara-files-generator (~> 0.0.1)
     foobara-util (1.0.1)
-    formatador (1.1.0)
+    formatador (1.1.1)
     guard (2.19.1)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)

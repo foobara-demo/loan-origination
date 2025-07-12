@@ -15,7 +15,7 @@ module FoobaraDemo
           delete_all_credit_policies
 
           create_credit_policy_that_requires_better_fico_scores
-          create_credit_policy_that_requires_more_pay_stubs
+          create_credit_policy_that_requires_more_income_verification
           create_lenient_credit_policy
 
           create_demo_loan_files
@@ -30,7 +30,7 @@ module FoobaraDemo
         end
 
         attr_accessor :credit_policy_that_requires_better_fico_scores,
-                      :credit_policy_that_requires_more_pay_stubs,
+                      :credit_policy_that_requires_more_income_verification,
                       :lenient_credit_policy,
                       :demo_loan_files,
                       :loan_file
@@ -46,17 +46,15 @@ module FoobaraDemo
         def create_credit_policy_that_requires_better_fico_scores
           self.credit_policy_that_requires_better_fico_scores = run_subcommand!(
             CreateCreditPolicy, institution: "Bank A",
-
                                 minimum_credit_score: 700,
                                 credit_score_to_use: :median,
                                 minimum_pay_stub_count: 1
           )
         end
 
-        def create_credit_policy_that_requires_more_pay_stubs
-          self.credit_policy_that_requires_more_pay_stubs = run_subcommand!(
+        def create_credit_policy_that_requires_more_income_verification
+          self.credit_policy_that_requires_more_income_verification = run_subcommand!(
             CreateCreditPolicy, institution: "Bank B",
-
                                 minimum_credit_score: 700,
                                 credit_score_to_use: :maximum,
                                 minimum_pay_stub_count: 2
@@ -66,7 +64,6 @@ module FoobaraDemo
         def create_lenient_credit_policy
           self.lenient_credit_policy = run_subcommand!(
             CreateCreditPolicy, institution: "Bank C",
-
                                 minimum_credit_score: 700,
                                 credit_score_to_use: :maximum,
                                 minimum_pay_stub_count: 1
@@ -76,7 +73,7 @@ module FoobaraDemo
         def create_demo_loan_files
           name_to_credit_policy = {
             Barbara: credit_policy_that_requires_better_fico_scores,
-            Basil: credit_policy_that_requires_more_pay_stubs,
+            Basil: credit_policy_that_requires_more_income_verification,
             Fumiko: lenient_credit_policy
           }
 
