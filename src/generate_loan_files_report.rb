@@ -38,7 +38,18 @@ module FoobaraDemo
           }
 
           if underwriter_decision
-            report[:underwriter_decision] = underwriter_decision
+            attributes = {
+              decision: underwriter_decision.decision,
+              credit_score_used: underwriter_decision.credit_score_used
+            }
+
+            denied_reasons = underwriter_decision.denied_reasons
+
+            if denied_reasons && !denied_reasons.empty?
+              attributes[:denied_reasons] = denied_reasons
+            end
+
+            report[:underwriter_decision] = attributes
           end
 
           report
