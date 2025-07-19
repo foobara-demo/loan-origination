@@ -1,11 +1,7 @@
-require_relative "errors/cannot_transition_state_error"
-
 module FoobaraDemo
   module LoanOrigination
     class ApproveLoanFile < Foobara::Command
-      depends_on CreateUnderwriterDecision
-
-      possible_input_error :loan_file, CannotTransitionStateError
+      depends_on CreateUnderwriterDecision, TransitionLoanFileState
 
       inputs do
         credit_score_used :integer, :required
@@ -17,12 +13,6 @@ module FoobaraDemo
         transition_loan_file
 
         nil
-      end
-
-      def validate
-        unless loan_file.state_machine.can?(:approve)
-          add_input_error CannotTransitionStateError.new(loan_file, attempted_transition: transition, path: :loan_file)
-        end
       end
 
       def transition
@@ -39,7 +29,7 @@ module FoobaraDemo
       end
 
       def transition_loan_file
-        loan_file.state_machine.perform_transition!(transition)
+        run_subcommand!(TransitionLoanFileState, loan_file:, transition:)
       end
     end
   end

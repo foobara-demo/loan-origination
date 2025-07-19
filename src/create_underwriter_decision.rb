@@ -1,3 +1,5 @@
+require_relative "errors/cannot_transition_state_error"
+
 module FoobaraDemo
   module LoanOrigination
     class CreateUnderwriterDecision < Foobara::Command
