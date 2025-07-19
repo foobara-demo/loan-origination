@@ -1,6 +1,8 @@
 module FoobaraDemo
   module LoanOrigination
     class DenyLoanFile < Foobara::Command
+      depends_on CreateUnderwriterDecision
+
       possible_input_error :denied_reasons, :cannot_be_empty
       possible_input_error :loan_file, CannotTransitionStateError
 
@@ -28,7 +30,9 @@ module FoobaraDemo
       end
 
       def create_underwriting_decision
-        loan_file.underwriter_decision = LoanFile::UnderwriterDecision.new(
+        run_subcommand!(
+          CreateUnderwriterDecision,
+          loan_file:,
           decision: :denied,
           credit_score_used:,
           denied_reasons:

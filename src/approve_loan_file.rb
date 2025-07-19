@@ -3,6 +3,8 @@ require_relative "errors/cannot_transition_state_error"
 module FoobaraDemo
   module LoanOrigination
     class ApproveLoanFile < Foobara::Command
+      depends_on CreateUnderwriterDecision
+
       possible_input_error :loan_file, CannotTransitionStateError
 
       inputs do
@@ -28,7 +30,12 @@ module FoobaraDemo
       end
 
       def create_underwriting_decision
-        loan_file.underwriter_decision = LoanFile::UnderwriterDecision.new(decision: :approved, credit_score_used:)
+        run_subcommand!(
+          CreateUnderwriterDecision,
+          loan_file:,
+          decision: :approved,
+          credit_score_used:
+        )
       end
 
       def transition_loan_file
