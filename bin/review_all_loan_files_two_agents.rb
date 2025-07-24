@@ -9,7 +9,7 @@ Foobara::LoadDotenv.run!(dir: __dir__)
 
 require "foobara/anthropic_api" if ENV.key?("ANTHROPIC_API_KEY")
 require "foobara/open_ai_api" if ENV.key?("OPENAI_API_KEY")
-# require "foobara/ollama_api" if ENV.key?("OLLAMA_API_URL")
+require "foobara/ollama_api" if ENV.key?("OLLAMA_API_URL")
 
 require "foobara/sh_cli_connector"
 require "foobara/agent_backed_command"
@@ -32,7 +32,10 @@ module FoobaraDemo
                   "CreditPolicy and approves it if and only if all requirements are met. Otherwise denies it."
 
       inputs UnderwriterSummary
-      # result LoanFile::UnderwriterDecision
+      # inputs do
+      #   loan_file LoanFile, :required
+      # end
+      result LoanFile::UnderwriterDecision
 
       depends_on StartUnderwriterReview,
                  FindCreditPolicy,
@@ -42,6 +45,21 @@ module FoobaraDemo
       verbose
       agent_name "Inner"
       # pass_aggregates_to_llm
+
+      # llm_model  "qwen3:32b" # works!
+      # llm_model "qwen3:14b" # wooooooooow this works!
+      llm_model "qwen3:8b" # woooooooooooooooooooooow this works!! how??
+      # llm_model "qwen3:4b"
+
+      # llm_model "gpt-4"
+
+      # llm_model  "claude-3-7-sonnet-20250219"
+      # llm_model  "claude-sonnet-4-20250514"
+      # llm_model  "claude-opus-4-20250514"
+      # llm_model  "o1"
+      # llm_model  "o3-mini"
+
+      # llm_model  "gpt-4o"
     end
 
     class ReviewAllLoanFiles < Foobara::AgentBackedCommand
@@ -53,11 +71,24 @@ module FoobaraDemo
       end
 
       depends_on FindALoanFileThatNeedsReview,
-                 ReviewLoanFile,
-                 FindLoanFile
+                 ReviewLoanFile # ,
+      # FindLoanFile
       verbose
       agent_name "Outer"
-      llm_model "gpt-4"
+      # llm_model "gpt-4"
+      llm_model "qwen3:14b" # this works!
+      # llm_model "qwen3:32b" # almost works... if running twice then it works,
+      # but if running only once stops processing records after the first two
+
+      # llm_model  "claude-3-7-sonnet-20250219"
+      # llm_model  "claude-sonnet-4-20250514"
+      # llm_model  "claude-opus-4-20250514"
+      # llm_model  "o1"
+      # llm_model  "o3-mini"
+
+      # llm_model  "gpt-4o"
+      # llm_model  "qwen3:14b"
+      # llm_model  "qwen3:8b"
     end
   end
 end
