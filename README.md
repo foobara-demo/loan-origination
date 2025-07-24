@@ -1,29 +1,59 @@
-# 
+# A demo LoanOrigination domain
 
-TODO: Delete this and the text below, and describe your gem
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library
-into a gem. Put your Ruby code in the file `lib/foobara/empty_ruby_project_generator`. To experiment with that code,
-run `bin/console` for an interactive prompt.
-
+This is just a random LoanOrigination domain I made for demos/experiments, in particular to experiment
+with Foobara::Agent and Foobara::AgentBackedCommand.
 
 ## Installation
 
 Typical stuff: add `gem "foobara-demo-loan-origination"` to your Gemfile or .gemspec file. Or even just
 `gem install foobara-demo-loan-origination` if just playing with it directly in scripts.
 
-## Usage
+## Playing with the demo scripts
 
-TODO: Write usage instructions here
+The demo scripts are currently in bin/ but should be moved to something like example_scripts/
+or experiments/.
 
-```ruby
-#!/usr/bin/env ruby
+You can `cd bin` and `bundle install`. Then, you can set up the services you wish to use
+(either foobara-ollama-api, foobara-open-ai-api, or anthropic-api)
+by setting the relevant environment variable values in .env.development.test (or copy it to
+.env.development.test.local first.)
 
-require "foobara/load_dotenv"
-Foobara::LoadDotenv.run!(dir: __dir__)
+Some example commands for running some of these files from `bin/`...
 
-TODO: some example code
+To set up demo data:
+
 ```
+./prepare-loan-records
+```
+
+To see a slice of demo data:
+
+```
+$ ./loan-origination GenerateLoanFilesReport
+```
+
+To review all loans with one line of added Ruby code:
+
+```
+$ ./loan-origination-add-abc-one-liner ReviewAllLoanFilesThatNeedReview --agent-options-verbose --llm-model gpt-4o
+```
+
+You can pass `--help` to the above to see available options.
+
+To run a script that runs 1 AgentBackedCommand and uses its outcome programmatically:
+
+```
+$ ./review_all_loan_files.rb
+```
+
+To run a script that uses two AgentBackedCommands and uses the outcome programmatically:
+
+```
+$ ./review_all_loan_files_two_agents.rb
+```
+
+The above two scripts can have their behavior changed by editing the files. See the comments in those files.
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub
