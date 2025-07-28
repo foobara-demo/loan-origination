@@ -23,7 +23,7 @@ Some example commands for running some of these files from `bin/`...
 To set up demo data:
 
 ```
-./prepare-loan-records
+$ ./prepare-loan-records
 ```
 
 To see a slice of demo data:
