@@ -22,9 +22,10 @@ GEM
     docile (1.4.1)
     dotenv (3.1.8)
     erb (5.0.2)
-    extract-repo (0.0.13)
-      foobara (~> 0.0.102)
-      foobara-sh-cli-connector (~> 0.0.1)
+    extract-repo (0.0.9)
+      foobara
+      foobara-sh-cli-connector
+    ffi (1.17.2)
     ffi (1.17.2-x86_64-linux-gnu)
     foob (0.0.15)
       foobara (~> 0.0.116)
@@ -46,7 +47,7 @@ GEM
       foobara-type-generator (< 2.0.0)
       foobara-typescript-react-command-form-generator (< 2.0.0)
       foobara-typescript-remote-command-generator (< 2.0.0)
-    foobara (0.0.139)
+    foobara (0.0.140)
       bigdecimal
       foobara-lru-cache (~> 0.0.2)
       foobara-util (>= 1.0.0)
@@ -99,8 +100,8 @@ GEM
     foobara-rubocop-rules (1.0.0)
       rubocop
       rubocop-rspec
-    foobara-sh-cli-connector (0.0.18)
-      foobara (~> 0.0.88)
+    foobara-sh-cli-connector (1.0.1)
+      foobara (>= 0.0.136, < 2.0.0)
     foobara-sh-cli-connector-generator (0.0.5)
       foobara-files-generator (~> 0.0.1)
     foobara-spec-helpers (0.0.4)
@@ -112,7 +113,7 @@ GEM
       foobara-typescript-remote-command-generator (~> 0.0.1)
     foobara-typescript-remote-command-generator (0.0.24)
       foobara-files-generator (~> 0.0.1)
-    foobara-util (1.0.1)
+    foobara-util (1.0.2)
     formatador (1.1.1)
     guard (2.19.1)
       formatador (>= 0.2.4)
@@ -137,7 +138,7 @@ GEM
       pp (>= 0.6.0)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
-    json (2.13.1)
+    json (2.13.2)
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
     listen (3.9.0)
@@ -152,7 +153,7 @@ GEM
       shellany (~> 0.0)
     ostruct (0.6.3)
     parallel (1.27.0)
-    parser (3.3.8.0)
+    parser (3.3.9.0)
       ast (~> 2.4.1)
       racc
     pp (0.6.2)
@@ -243,7 +244,8 @@ GEM
       hashdiff (>= 0.4.0, < 2.0.0)
 
 PLATFORMS
-  x86_64-linux-gnu
+  ruby
+  x86_64-linux
 
 DEPENDENCIES
   foob
