@@ -12,5 +12,14 @@ connector = Foobara::CommandConnectors::ShCliConnector.new
 connector.connect(FoobaraDemo::LoanOrigination::FindAllLoanFiles)
 connector.connect(FoobaraDemo::LoanOrigination::GenerateLoanFilesReport)
 connector.connect(FoobaraDemo::LoanOrigination::AddPayStub)
+connector.connect(FoobaraDemo::LoanOrigination::FindALoanFileThatNeedsReview)
+connector.connect(FoobaraDemo::LoanOrigination::StartUnderwriterReview)
+connector.connect(FoobaraDemo::LoanOrigination::FindCreditPolicy)
+connector.connect(FoobaraDemo::LoanOrigination::DenyLoanFile)
+connector.connect(FoobaraDemo::LoanOrigination::AddCreditScore)
+connector.connect(FoobaraDemo::LoanOrigination::ApproveLoanFile)
+connector.connect(FoobaraDemo::LoanOrigination::CreateCreditPolicy)
+connector.connect(FoobaraDemo::LoanOrigination::StartLoanApplication)
+connector.connect(FoobaraDemo::LoanOrigination::FindLoanFile)
 
 connector.run
